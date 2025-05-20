@@ -1,0 +1,122 @@
+### Register User
+POST http://localhost:5001/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "akap",
+  "email": "admin@example.com",
+  "password": "password123"
+}
+
+### Login User
+POST http://localhost:5001/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "password123"
+}
+
+### Refresh Token
+GET http://localhost:5001/api/auth/refresh-token
+
+### Get All Users
+GET http://localhost:5001/api/users
+
+### Create User
+POST http://localhost:5001/api/users
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "email": "user1@example.com",
+  "password": "userpassword"
+}
+
+### Update User
+PUT http://localhost:5001/api/users/1
+Content-Type: application/json
+
+{
+  "username": "updatedUser",
+  "email": "updated@example.com"
+}
+
+### Delete User
+DELETE http://localhost:5001/api/users/1
+
+### Get All Restaurants
+GET http://localhost:5001/api/restaurants
+
+### Create Restaurant
+POST http://localhost:5001/api/restaurants
+Content-Type: application/json
+
+{
+  "name": "Resto Enak",
+  "location": "Jalan ABC No. 1",
+  "category": "Makan enak"
+}
+
+### Update Restaurant
+PUT http://localhost:5001/api/restaurants/1
+Content-Type: application/json
+
+{
+  "name": "Resto Mantap",
+  "location": "Jalan XYZ No. 2"
+}
+
+### Delete Restaurant
+DELETE http://localhost:5001/api/restaurants/1
+
+### Get All Menus
+GET http://localhost:5001/api/menus
+
+### Create Menu
+POST http://localhost:5001/api/menus
+Content-Type: application/json
+
+{
+  "name": "Nasi Goreng",
+  "price": 15000,
+  "restaurantId": 1
+}
+
+### Update Menu
+PUT http://localhost:5001/api/menus/1
+Content-Type: application/json
+
+{
+  "name": "Mie Goreng",
+  "price": 18000
+}
+
+### Delete Menu
+DELETE http://localhost:5001/api/menus/1
+
+### Get All Reviews
+GET http://localhost:5001/api/reviews
+
+### Create Review
+POST http://localhost:5001/api/reviews
+Content-Type: application/json
+
+{
+  "comment": "Makanannya enak banget!",
+  "rating": 5,
+  "userId": 1,
+  "restaurantId": 1
+}
+
+### Update Review
+PUT http://localhost:5001/api/reviews/1
+Content-Type: application/json
+
+{
+  "content": "Rasa biasa aja.",
+  "rating": 3
+}
+
+### Delete Review
+DELETE http://localhost:5001/api/reviews/1
