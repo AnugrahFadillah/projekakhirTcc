@@ -28,18 +28,25 @@ export const register = async (req, res) => {
   }
 };
 
-// LOGIN USER
+// LOGIN USER (dengan username saja)
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { username } });
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
-    const token = jwt.sign({ userId: user.id, email: user.email }, SECRET, { expiresIn: EXPIRES });
+    const token = jwt.sign({ userId: user.id, username: user.username }, SECRET, { expiresIn: EXPIRES });
+    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: false, // true kalau pakai HTTPS
+      sameSite: 'strict',
+    });
+    
 
     res.json({ message: 'Login successful', token });
   } catch (error) {
@@ -51,7 +58,7 @@ export const login = async (req, res) => {
 export const getUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      attributes: { exclude: ['password', 'refresh_token'] }, // jangan kirim password
+      attributes: { exclude: ['password', 'refresh_token'] },
     });
     res.json(users);
   } catch (error) {

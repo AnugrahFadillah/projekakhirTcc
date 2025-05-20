@@ -3,9 +3,10 @@ POST http://localhost:5001/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "akap",
-  "email": "admin@example.com",
-  "password": "password123"
+  "username": "arapp",
+  "email": "arapp@example.com",
+  "password": "123",
+  "role": "admin"
 }
 
 ### Login User
@@ -13,8 +14,8 @@ POST http://localhost:5001/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@example.com",
-  "password": "password123"
+  "username": "arapp",
+  "password": "123"
 }
 
 ### Refresh Token
@@ -80,6 +81,7 @@ Content-Type: application/json
 {
   "name": "Nasi Goreng",
   "price": 15000,
+  "description" : "Nasi Digoreng",
   "restaurantId": 1
 }
 

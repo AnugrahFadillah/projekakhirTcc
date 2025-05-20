@@ -29,9 +29,9 @@ export const register = async (req, res) => {
 
 // Login user dan generate token
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   try {
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { username } });
     if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
 
     const match = await bcrypt.compare(password, user.password);
@@ -54,8 +54,7 @@ export const login = async (req, res) => {
 
     // kirim refresh token di cookie dan access token di body response
     res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 hari
+      httpOnly: true, // 7 hari
     });
 
     res.json({ accessToken });

@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
+import { refreshToken } from '../controller/RefreshToken.js';
 
 const User = sequelize.define('User', {
     username: {
@@ -17,8 +18,10 @@ const User = sequelize.define('User', {
     },
     role: {
         type: DataTypes.ENUM('admin', 'user'),
-        defaultValue: 'user',
     },
+    refreshToken: {
+        type: DataTypes.TEXT,
+    }
 }, {
     timestamps: true,
     tableName: 'users',
